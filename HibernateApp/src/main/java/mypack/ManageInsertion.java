@@ -25,15 +25,15 @@ public class ManageInsertion {
 		ManageInsertion ME = new ManageInsertion();
 
 		/* Add few Users records in database */
-		Integer empID1 = ME.addDataProvider("Alex", "cine","da");
+		Integer empID1 = ME.addDataProvider("Alex", "Alex","pass");
 		
-	
+		
 		/* List down all the DataProq */
 		ME.listDataProviderq();
 
 		/* Update Users's records */
 		ME.updateDataProvider(empID1, "ionel");
-
+		
 	
 		/* List down new list of the DataProq */
 		ME.listDataProviderq();

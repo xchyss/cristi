@@ -9,9 +9,18 @@
 
 <body style="background-color:powderblue;">
 
-<h2>Hello: <%= (String)request.getAttribute("firstname") %></h2>
+<h2>Hello <%= (String)request.getAttribute("firstname") %></h2>
 
 
+
+<ul>
+
+		<a href = "#"><h1>User</h1></a>
+
+		<a href = "#"><h1>Task</h1></a>
+		
+		<a href = "#"><h1>Project</h1></a>
+</ul>
 
 </body>
 </html>
