@@ -12,7 +12,7 @@ import org.hibernate.Transaction;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-public class manageInsertion {
+public class ManageInsertion {
 	private static SessionFactory factory;
 
 	public static void main(String[] args) {
@@ -22,7 +22,7 @@ public class manageInsertion {
 			System.err.println("Failed to create sessionFactory object." + ex);
 			throw new ExceptionInInitializerError(ex);
 		}
-		manageInsertion ME = new manageInsertion();
+		ManageInsertion ME = new ManageInsertion();
 
 		/* Add few Users records in database */
 		Integer empID1 = ME.addDataProvider("Alex", "cine","da");
@@ -43,11 +43,11 @@ public class manageInsertion {
 	public Integer addDataProvider(String firstname, String secondname, String password) {
 		Session session = factory.openSession();
 		Transaction tx = null;
-		Integer UsersID = null;
+		Integer userid = null;
 		try {
 			tx = session.beginTransaction();
 			DataProvider DataProvider = new DataProvider(firstname, secondname, password);
-			UsersID = (Integer) session.save(DataProvider);
+			userid = (Integer) session.save(DataProvider);
 			tx.commit();
 		} catch (HibernateException e) {
 			if (tx != null)
@@ -56,7 +56,7 @@ public class manageInsertion {
 		} finally {
 			session.close();
 		}
-		return UsersID;
+		return userid;
 	}
 
 	/* Method to READ all the DataProq */
@@ -65,7 +65,7 @@ public class manageInsertion {
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			List DataProviderq = session.createQuery("FROM DataProviderq").list();
+			List DataProviderq = session.createQuery("FROM DataProvider").list();
 			for (Iterator iterator = DataProviderq.iterator(); iterator.hasNext();) {
 				DataProvider DataProvider = (DataProvider) iterator.next();
 				System.out.print("First Name: " + DataProvider.getFirstname());
@@ -83,13 +83,13 @@ public class manageInsertion {
 	}
 
 	/* Method to UPDATE Privileges for an Users */
-	public void updateDataProvider(Integer UsersID, String password) {
+	public void updateDataProvider(Integer userid, String password) {
 		Session session = factory.openSession();
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			DataProvider DataProvider = (DataProvider) session.get(DataProvider.class, UsersID);
-			DataProvider.setUserid(UsersID);
+			DataProvider DataProvider = (DataProvider) session.get(DataProvider.class, userid);
+			DataProvider.setUserid(userid);
 			session.update(DataProvider);
 			tx.commit();
 		} catch (HibernateException e) {
